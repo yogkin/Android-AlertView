@@ -51,7 +51,7 @@ public class MainActivity extends Activity implements OnItemClickListener, OnDis
     }
 
     public void alertShow2(View view) {
-        new AlertView("标题", "内容", null, new String[]{"确定"}, null, this, AlertView.Style.Alert, this).show();
+        new AlertView("标题", "内容", null, new String[]{"确定"}, null, this, AlertView.Style.Alert,true ,this).show();
     }
 
     public void alertShow3(View view) {

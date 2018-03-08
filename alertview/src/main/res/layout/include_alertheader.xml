@@ -5,13 +5,30 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tvAlertTitle"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/height_alert_title"
-        android:gravity="center"
-        android:textColor="@color/textColor_alert_title"
-        android:textSize="@dimen/textSize_alert_title" />
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/tvAlertTitleIv"
+            android:layout_margin="10dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/delete_ic"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+
+        <TextView
+
+            android:id="@+id/tvAlertTitle"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_alert_title"
+            android:gravity="center"
+            android:textColor="@color/textColor_alert_title"
+            android:textSize="@dimen/textSize_alert_title" />
+
+    </RelativeLayout>
+
 
     <TextView
         android:id="@+id/tvAlertMsg"

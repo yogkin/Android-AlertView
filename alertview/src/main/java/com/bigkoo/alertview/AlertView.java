@@ -13,6 +13,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -39,6 +40,7 @@ public class AlertView {
     public static final int CANCELPOSITION = -1;//点击取消按钮返回 －1，其他按钮从0开始算
 
     private String title;
+    private boolean isShowRightIv;
     private String msg;
     private String[] destructive;
     private String[] others;
@@ -80,8 +82,13 @@ public class AlertView {
     }
 
     public AlertView(String title, String msg, String cancel, String[] destructive, String[] others, Context context, Style style,OnItemClickListener onItemClickListener){
+        this(title,msg,cancel,destructive,others,context,style,false,onItemClickListener);
+    }
+
+    public AlertView(String title, String msg, String cancel, String[] destructive, String[] others, Context context, Style style,boolean isShowRightIv,OnItemClickListener onItemClickListener){
         this.contextWeak = new WeakReference<>(context);
         if(style != null)this.style = style;
+        this.isShowRightIv = isShowRightIv;
         this.onItemClickListener = onItemClickListener;
 
         initData(title, msg, cancel, destructive, others);
@@ -147,12 +154,29 @@ public class AlertView {
         loAlertHeader = (ViewGroup) viewGroup.findViewById(R.id.loAlertHeader);
         //标题和消息
         TextView tvAlertTitle = (TextView) viewGroup.findViewById(R.id.tvAlertTitle);
+        ImageView ivAlertTitle = (ImageView) viewGroup.findViewById(R.id.tvAlertTitleIv);
         TextView tvAlertMsg = (TextView) viewGroup.findViewById(R.id.tvAlertMsg);
         if(title != null) {
             tvAlertTitle.setText(title);
         }else{
             tvAlertTitle.setVisibility(View.GONE);
         }
+
+        if(isShowRightIv) {
+            ivAlertTitle.setVisibility(View.VISIBLE);
+        }else{
+            ivAlertTitle.setVisibility(View.GONE);
+        }
+
+        ivAlertTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isShowing()) {
+                    dismiss();
+                }
+            }
+        });
+
         if(msg != null) {
             tvAlertMsg.setText(msg);
         }else{
